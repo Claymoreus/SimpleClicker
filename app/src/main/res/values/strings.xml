@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SimpleClicker</string>
+    <string name="action_settings">Settings</string>
+    <string name="activity_firstmenu">FirstMenu</string>
+    <string name="activity_secondmenu">SecondMenu</string>
+    <string name="activity_thirdmenu">ThirdMenu</string>
+    <string name="activity_fourthmenu">FourthMenu</string>
+</resources>

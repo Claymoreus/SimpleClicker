@@ -25,19 +25,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageViewBackgroundMain"
+            android:layout_width="413dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="-2dp"
+            android:layout_marginLeft="0sp"
+            android:layout_marginTop="0sp"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@drawable/imgpiskar" />
+
+        <ImageButton
+            android:id="@+id/imgBtnMonster"
+            android:layout_width="190dp"
+            android:layout_height="300sp"
+            android:layout_above="@+id/progressBarHP"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="109dp"
+            android:layout_marginLeft="109dp"
+            android:layout_marginTop="134dp"
+            android:layout_marginEnd="112dp"
+            android:layout_marginRight="112dp"
+            android:layout_marginBottom="30sp"
+            app:srcCompat="@drawable/dpsman001" />
+
         <TextView
-            android:id="@+id/textLocationName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
+            android:id="@+id/textLocationProgress"
+            android:layout_width="156dp"
+            android:layout_height="103dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="173dp"
-            android:layout_marginLeft="173dp"
-            android:layout_marginTop="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="41dp"
+            android:layout_marginEnd="71dp"
+            android:layout_marginRight="71dp"
             android:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -47,10 +72,12 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="173dp"
-            android:layout_marginLeft="173dp"
-            android:layout_marginTop="46dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="78dp"
             android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -64,7 +91,25 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="85dp"
             android:layout_marginLeft="85dp"
-            android:layout_marginBottom="47dp" />
+            android:layout_marginBottom="47dp"
+            android:indeterminate="false" />
+
+        <TextView
+            android:id="@+id/textLocationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="42dp"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textMonsterHealth"
@@ -77,21 +122,10 @@
             android:layout_marginRight="173dp"
             android:layout_marginBottom="56dp"
             android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textLocationProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="86dp"
-            android:layout_marginRight="86dp"
-            android:text="TextView"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </RelativeLayout>
 
@@ -172,29 +206,7 @@
             android:text="BTN04"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageViewBackgroundMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="-2dp"
-            android:layout_marginLeft="0sp"
-            android:layout_marginTop="0sp"
-            tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
 
-        <ImageButton
-            android:id="@+id/imgBtnMonster"
-            android:layout_width="190dp"
-            android:layout_height="187dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="117dp"
-            android:layout_marginLeft="117dp"
-            android:layout_marginTop="201dp"
-            app:srcCompat="@android:drawable/btn_star_big_on" />
 
     </RelativeLayout>
 

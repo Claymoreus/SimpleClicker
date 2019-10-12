@@ -1,6 +1,7 @@
 package com.example.simpleclicker;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,12 +44,89 @@ public class MainActivity extends AppCompatActivity {
     private Button btnMenu03;
     private Button btnMenu04;
     //*************************************
+    public int monsterKills =0;
+    public int monsterKillsOveral =0;
+    public int clickCountOveral =0;
+    public int lvlFinished;
+    public int playerLvl;
+    public int playerExp;
+    public int monsterHealth = 10;
+    public int clickDamage = 1;
 
+    public int playerMoney;
+
+
+    public void checkLocation (){
+        String locName = "";
+        String mobName = "";
+        if (monsterKills <= 5) {
+            locName = "Пискаревка";
+        } else if (monsterKills >5) {
+            locName = "Финбан";
+        }
+        if (monsterKills <= 5) {
+            mobName = "Унылый ДПСник";
+            imgBtnMonster.setImageResource(R.drawable.dpsman001);
+        } else if (monsterKills > 5) {
+            mobName = "Веселый ДПСник";
+            imgBtnMonster.setImageResource(R.drawable.dpsman002);
+    }
+        textMonsterName.setText(mobName);
+        textLocationName.setText(locName);
+
+    }
+
+    public void clickerBattle(){
+        //int monsterHealth;
+        //int monsterKills =0;
+        String message = "";
+        String stats = "";
+        clickCountOveral++;
+        /*if (monsterKills == 0) {
+            //monsterHealth = 10;
+            monsterHealth = monsterHealth;
+            //progressBarHP.setMax(monsterHealth);
+        } else if (monsterKills > 0) {
+            //monsterHealth = monsterKills * monsterHealth;
+        }*/
+
+        if (monsterHealth > 0){
+            monsterHealth -= clickDamage;
+            //progressBarHP.setProgress(monsterHealth);
+            message = monsterHealth + " HP";
+
+        } else if (monsterHealth <= 0){
+            monsterKills++;
+            monsterKillsOveral++;
+            lvlFinished++;
+            playerExp++;
+            playerMoney = playerMoney + ((lvlFinished * 50) * lvlFinished);
+            monsterHealth = 10 * monsterKills;
+
+
+
+        }
+        stats = monsterKills + " сбито ДПСов/" + "  " + clickCountOveral + " кликов/" + "  " + lvlFinished + " уровень/  " +  playerMoney + "  money/";
+        textMonsterHealth.setText(message);
+        textLocationProgress.setText(stats);
+    }
+    /*private void postProgress(int monsterHealth) {
+        String strProgress = String.valueOf(monsterHealth) + " %";
+        progressBarHP.setProgress(monsterHealth);
+
+        if (monsterHealth == 0) {
+            progressBarHP.setSecondaryProgress(0);
+        } else {
+            progressBarHP.setSecondaryProgress(monsterHealth);
+        }
+        textMonsterHealth.setText(strProgress);
+
+    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imageViewBackgroundMain = (ImageView) findViewById(R.id.imageViewBackgroundMain);
+        //imageViewBackgroundMain = (ImageView) findViewById(R.id.imageViewBackgroundMain);
         imgBtnMonster = (ImageButton) findViewById(R.id.imgBtnMonster);
 
         textLocationName = (TextView) findViewById(R.id.textLocationName);
@@ -61,6 +139,25 @@ public class MainActivity extends AppCompatActivity {
         btnMenu03 = (Button) findViewById(R.id.btnMenu03);
         btnMenu04 = (Button) findViewById(R.id.btnMenu04);
 
+
+        ImageView imageView = findViewById(R.id.imageViewBackgroundMain);
+        imageView.setImageResource(R.drawable.imgpiskar);
+
+        imgBtnMonster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkLocation ();
+                if (monsterHealth >0) {
+                    clickerBattle();
+                } else {
+                    //monsterHealth = 10 * monsterKills;
+                    textMonsterHealth.setText(monsterHealth + " HP");
+                    clickerBattle();
+                }
+
+                //postProgress(monsterHealth);
+            }
+        });
 
 
         // Menu block ************************************************************************
@@ -92,8 +189,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
         //Menu block end************************************************************************
 
 

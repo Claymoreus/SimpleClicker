@@ -6,4 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".FirstMenuActivity">
 
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="601dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewUpgrade01"
+                android:layout_width="match_parent"
+                android:layout_height="150sp"
+                android:text="Upgrage weapon" />
+
+            <Button
+                android:id="@+id/btnUpgrade01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buy 1 " />
+
+            <TextView
+                android:id="@+id/textViewUpgrade02"
+                android:layout_width="match_parent"
+                android:layout_height="150sp"
+                android:text="Upgrade Armor" />
+
+            <Button
+                android:id="@+id/btnUpgrade02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buy 1" />
+
+            <TextView
+                android:id="@+id/textViewUpgrade03"
+                android:layout_width="match_parent"
+                android:layout_height="150sp"
+                android:text="Upgrade Ammo" />
+
+            <Button
+                android:id="@+id/btnUpgrade03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buy 1" />
+
+            <TextView
+                android:id="@+id/textViewUpgrade04"
+                android:layout_width="match_parent"
+                android:layout_height="150sp"
+                android:text="Upgrade Speed" />
+
+            <Button
+                android:id="@+id/btnUpgrade04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buy 1" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

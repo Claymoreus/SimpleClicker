@@ -37,7 +37,7 @@ public class FirstMenuActivity extends AppCompatActivity {
         playerUpgradeCost01 = (playerUpgradeLvl01 * 1) * playerUpgradeLvl01;
         String message = "";
         if (playerUpgradeCost01 > mainActivity.playerMoney) {
-            message = " Not enogth money for buy! ";
+            message = " Not money for buy! ";
             textViewUpgrade01.setText(message);
         } else {
             mainActivity.playerMoney -= playerUpgradeCost01;
@@ -50,7 +50,7 @@ public class FirstMenuActivity extends AppCompatActivity {
         playerUpgradeCost02 = (playerUpgradeLvl02 * 1) * playerUpgradeLvl02;
         String message = "";
         if (playerUpgradeCost02 > mainActivity.playerMoney) {
-            message = " Not enogth money for buy! ";
+            message = " Not money for buy! ";
             textViewUpgrade02.setText(message);
         } else {
             mainActivity.playerMoney -= playerUpgradeCost02;
@@ -63,7 +63,7 @@ public class FirstMenuActivity extends AppCompatActivity {
         playerUpgradeCost03 = (playerUpgradeLvl03 * 1) * playerUpgradeLvl03;
         String message = "";
         if (playerUpgradeCost03 > mainActivity.playerMoney) {
-            message = " Not enogth money for buy! ";
+            message = " Not money for buy! ";
             textViewUpgrade03.setText(message);
         } else {
             mainActivity.playerMoney -= playerUpgradeCost03;
@@ -76,7 +76,7 @@ public class FirstMenuActivity extends AppCompatActivity {
         playerUpgradeCost04 = (playerUpgradeLvl04 * 1) * playerUpgradeLvl04;
         String message = "";
         if (playerUpgradeCost04 > mainActivity.playerMoney) {
-            message = " Not enogth money for buy! ";
+            message = " Not  money for buy! ";
             textViewUpgrade04.setText(message);
         } else {
             mainActivity.playerMoney -= playerUpgradeCost04;
@@ -99,10 +99,10 @@ public class FirstMenuActivity extends AppCompatActivity {
         textViewUpgrade03 = (TextView) findViewById(R.id.textViewUpgrade03);
         textViewUpgrade04 = (TextView) findViewById(R.id.textViewUpgrade04);
 
-        btnUpgrade01 = (Button) findViewById(R.id.btnMenu01);
-        btnUpgrade02 = (Button) findViewById(R.id.btnMenu02);
-        btnUpgrade03 = (Button) findViewById(R.id.btnMenu03);
-        btnUpgrade04 = (Button) findViewById(R.id.btnMenu04);
+        btnUpgrade01 = (Button) findViewById(R.id.btnUpgrade01);
+        btnUpgrade02 = (Button) findViewById(R.id.btnUpgrade02);
+        btnUpgrade03 = (Button) findViewById(R.id.btnUpgrade03);
+        btnUpgrade04 = (Button) findViewById(R.id.btnUpgrade04);
 
 
         btnUpgrade01.setOnClickListener(new View.OnClickListener() {

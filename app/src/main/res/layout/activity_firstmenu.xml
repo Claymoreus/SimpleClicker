@@ -18,6 +18,12 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/textMoneyNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Money now " />
+
+            <TextView
                 android:id="@+id/textViewUpgrade01"
                 android:layout_width="match_parent"
                 android:layout_height="150sp"

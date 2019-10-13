@@ -2,12 +2,11 @@ package com.example.simpleclicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
 
 public class FirstMenuActivity extends AppCompatActivity {
 
@@ -15,6 +14,7 @@ public class FirstMenuActivity extends AppCompatActivity {
     private TextView textViewUpgrade02;
     private TextView textViewUpgrade03;
     private TextView textViewUpgrade04;
+    private TextView textMoneyNow;
 
 
     private Button btnUpgrade01;
@@ -22,16 +22,18 @@ public class FirstMenuActivity extends AppCompatActivity {
     private Button btnUpgrade03;
     private Button btnUpgrade04;
 
-    public int playerUpgradeLvl01;  // Weapon
-    public int playerUpgradeLvl02;   //Armor
+    public int playerUpgradeLvl01 = 1;  // Weapon
+    public int playerUpgradeLvl02 = 2;   //Armor
     public int playerUpgradeLvl03;   //Speed
     public int playerUpgradeLvl04;   //Ammo
     private int playerUpgradeCost01;
     private int playerUpgradeCost02;
     private int playerUpgradeCost03;
     private int playerUpgradeCost04;
+    public int moneyForUpgrade;
 
-    MainActivity mainActivity = new MainActivity();
+
+    MainActivity mainActivity = new  MainActivity();
 
     public void getUpgraded01() {
         playerUpgradeCost01 = (playerUpgradeLvl01 * 1) * playerUpgradeLvl01;
@@ -42,6 +44,7 @@ public class FirstMenuActivity extends AppCompatActivity {
         } else {
             mainActivity.playerMoney -= playerUpgradeCost01;
             playerUpgradeLvl01++;
+
         }
         message = "Upgrade weapon: lvl:" + playerUpgradeLvl01 + " -- next lvl:" + (playerUpgradeLvl01 + 1);
         textViewUpgrade01.setText(message);
@@ -98,17 +101,28 @@ public class FirstMenuActivity extends AppCompatActivity {
         textViewUpgrade02 = (TextView) findViewById(R.id.textViewUpgrade02);
         textViewUpgrade03 = (TextView) findViewById(R.id.textViewUpgrade03);
         textViewUpgrade04 = (TextView) findViewById(R.id.textViewUpgrade04);
+        textMoneyNow = (TextView) findViewById(R.id.textMoneyNow);
 
         btnUpgrade01 = (Button) findViewById(R.id.btnUpgrade01);
         btnUpgrade02 = (Button) findViewById(R.id.btnUpgrade02);
         btnUpgrade03 = (Button) findViewById(R.id.btnUpgrade03);
         btnUpgrade04 = (Button) findViewById(R.id.btnUpgrade04);
 
+        //mainActivity.playerMoney = 100;
+        mainActivity.getPlayerMoney();
+        MoneyCalk moneyCalk = new MoneyCalk(moneyForUpgrade);
+        moneyCalk.getPlayerMoney2();
+        String MoneyNow = "Money now : " + moneyForUpgrade;
+
+
+        textMoneyNow.setText(MoneyNow);
 
         btnUpgrade01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                moneyForUpgrade = mainActivity.playerMoney;
                 getUpgraded01();
+                mainActivity.playerMoney = moneyForUpgrade;
             }
         });
         btnUpgrade02.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +145,7 @@ public class FirstMenuActivity extends AppCompatActivity {
         });
 
     }
-
-
+}
+class playerUpgradedMode {
 
 }

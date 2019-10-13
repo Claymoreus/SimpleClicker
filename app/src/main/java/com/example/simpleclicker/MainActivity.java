@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView textMonsterHealth;
 
 
-
     private ProgressBar progressBarHP;
 
     //Buttons *****************************
@@ -54,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     public int clickDamage = 1;
 
     public int playerMoney;
+    public int getPlayerMoney(){
+        return this.playerMoney;
+    }
 
 
     public void checkLocation (){
@@ -102,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
             playerExp++;
             playerMoney = playerMoney + ((lvlFinished * 50) * lvlFinished);
             monsterHealth = 10 * monsterKills;
+            MoneyCalk moneyCalk = new MoneyCalk(playerMoney);
+            moneyCalk.setPlayerMoney2(playerMoney);
 
 
 
@@ -227,4 +231,19 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+}
+class MoneyCalk {
+    public MoneyCalk(int playerMoney2) {
+        this.playerMoney2 = playerMoney2;
+    }
+
+    public int getPlayerMoney2() {
+        return playerMoney2;
+    }
+
+    public void setPlayerMoney2(int playerMoney2) {
+        this.playerMoney2 = playerMoney2;
+    }
+
+    private int playerMoney2;
 }

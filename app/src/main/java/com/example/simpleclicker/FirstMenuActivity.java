@@ -16,40 +16,30 @@ public class FirstMenuActivity extends AppCompatActivity {
     private TextView textViewUpgrade04;
     private TextView textMoneyNow;
 
-
     private Button btnUpgrade01;
     private Button btnUpgrade02;
     private Button btnUpgrade03;
     private Button btnUpgrade04;
 
-    public int playerUpgradeLvl01 = 1;  // Weapon
-    public int playerUpgradeLvl02 = 2;   //Armor
-    public int playerUpgradeLvl03;   //Speed
-    public int playerUpgradeLvl04;   //Ammo
-    private int playerUpgradeCost01;
-    private int playerUpgradeCost02;
-    private int playerUpgradeCost03;
-    private int playerUpgradeCost04;
-    public int moneyForUpgrade;
 
-
-    MainActivity mainActivity = new  MainActivity();
+    PlayerUpgrade playerUpgrade = new PlayerUpgrade();
 
     public void getUpgraded01() {
-        playerUpgradeCost01 = (playerUpgradeLvl01 * 1) * playerUpgradeLvl01;
         String message = "";
-        if (playerUpgradeCost01 > mainActivity.playerMoney) {
+        if (playerUpgrade.getPlayerUpgrade01Cost() > PlayerMoney.money) {
             message = " Not money for buy! ";
             textViewUpgrade01.setText(message);
         } else {
-            mainActivity.playerMoney -= playerUpgradeCost01;
-            playerUpgradeLvl01++;
-
+            PlayerMoney.money -= playerUpgrade.getPlayerUpgrade01Cost();
+            playerUpgrade.setPlayerUpgrade01Lvl(playerUpgrade.getPlayerUpgrade01Lvl() + 1);
+            playerUpgrade.setUpgrade01Multiply(playerUpgrade.getPlayerUpgrade01Lvl()*3);
         }
-        message = "Upgrade weapon: lvl:" + playerUpgradeLvl01 + " -- next lvl:" + (playerUpgradeLvl01 + 1);
+        message = "Upgrade weapon: lvl:" + playerUpgrade.getPlayerUpgrade01Lvl() + " -- next lvl:" + (playerUpgrade.getPlayerUpgrade01Lvl() + 1)
+                + " /Next Upgrade " + playerUpgrade.getPlayerUpgrade01Cost() + "Rub" ;
         textViewUpgrade01.setText(message);
     }
-    public void getUpgraded02() {
+
+    /*public void getUpgraded02() {
         playerUpgradeCost02 = (playerUpgradeLvl02 * 1) * playerUpgradeLvl02;
         String message = "";
         if (playerUpgradeCost02 > mainActivity.playerMoney) {
@@ -87,7 +77,7 @@ public class FirstMenuActivity extends AppCompatActivity {
         }
         message = "Upgrade ammo: lvl:" + playerUpgradeLvl04 + " -- next lvl:" + (playerUpgradeLvl04 + 1);
         textViewUpgrade04.setText(message);
-    }
+    }*/
 
 
 
@@ -108,24 +98,21 @@ public class FirstMenuActivity extends AppCompatActivity {
         btnUpgrade03 = (Button) findViewById(R.id.btnUpgrade03);
         btnUpgrade04 = (Button) findViewById(R.id.btnUpgrade04);
 
-        //mainActivity.playerMoney = 100;
-        mainActivity.getPlayerMoney();
-        MoneyCalk moneyCalk = new MoneyCalk(moneyForUpgrade);
-        moneyCalk.getPlayerMoney2();
-        String MoneyNow = "Money now : " + moneyForUpgrade;
 
-
+        String MoneyNow = "Money now : " + PlayerMoney.money;
         textMoneyNow.setText(MoneyNow);
 
         btnUpgrade01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moneyForUpgrade = mainActivity.playerMoney;
                 getUpgraded01();
-                mainActivity.playerMoney = moneyForUpgrade;
+                String message = "";
+                message = "Upgrade weapon: lvl:" + playerUpgrade.getPlayerUpgrade01Lvl() + " -- next lvl:" + (playerUpgrade.getPlayerUpgrade01Lvl() + 1)
+                        + " /Next Upgrade " + playerUpgrade.getPlayerUpgrade01Cost() + "Rub" ;
+                textViewUpgrade01.setText(message);
             }
         });
-        btnUpgrade02.setOnClickListener(new View.OnClickListener() {
+        /*btnUpgrade02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getUpgraded02();
@@ -142,10 +129,41 @@ public class FirstMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getUpgraded04();
             }
-        });
+        });*/
 
     }
 }
-class playerUpgradedMode {
+class PlayerUpgrade  {
+    private int playerUpgrade01Lvl =1;
+    private int playerUpgrade01Cost = playerUpgrade01Lvl * 75;
+    private int upgrade01Multiply;
+
+    public int getUpgrade01Multiply() {
+        return upgrade01Multiply;
+    }
+
+    public void setUpgrade01Multiply(int upgrade01Multiply) {
+        this.upgrade01Multiply = upgrade01Multiply;
+    }
+
+
+
+
+
+    public int getPlayerUpgrade01Lvl() {
+        return playerUpgrade01Lvl;
+    }
+
+    public void setPlayerUpgrade01Lvl(int playerUpgrade01Lvl) {
+        this.playerUpgrade01Lvl = playerUpgrade01Lvl;
+    }
+
+    public int getPlayerUpgrade01Cost() {
+        return playerUpgrade01Cost;
+    }
+
+    public void setPlayerUpgrade01Cost(int playerUpgrade01Cost) {
+        this.playerUpgrade01Cost = playerUpgrade01Cost;
+    }
 
 }

@@ -23,10 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     //main parametrs
 
-
     private ImageView imageViewBackgroundMain;
     private ImageButton imgBtnMonster;
-
 
     //TextView ***************************
     private TextView textLocationProgress;
@@ -34,43 +32,36 @@ public class MainActivity extends AppCompatActivity {
     private TextView textMonsterName;
     private TextView textMonsterHealth;
 
-
     private ProgressBar progressBarHP;
-
     //Buttons *****************************
     private Button btnMenu01;
     private Button btnMenu02;
     private Button btnMenu03;
     private Button btnMenu04;
     //*************************************
-    public int monsterKills =0;
-    public int monsterKillsOveral =0;
-    public int clickCountOveral =0;
-    public int lvlFinished;
-    public int playerLvl;
-    public int playerExp;
-    public int monsterHealth = 10;
-    public int clickDamage = 1;
 
-    public int playerMoney;
-    public int getPlayerMoney(){
-        return this.playerMoney;
-    }
+    PlayerStatistic playerStats = new PlayerStatistic();
+    PlayerMoney playerMoney = new PlayerMoney();
+    Player player = new Player();
+    MonsterCharacter monster = new MonsterCharacter();
+
+
 
 
     public void checkLocation (){
         String locName = "";
         String mobName = "";
-        if (monsterKills <= 5) {
-            locName = "Пискаревка";
-        } else if (monsterKills >5) {
-            locName = "Финбан";
+        PlayerStatistic playerStatistic = new PlayerStatistic();
+        if (playerStatistic.getMonsterKills() <= 5) {
+            locName = "Тропа Гоблинов";
+        } else if (playerStatistic.getMonsterKills() >5) {
+            locName = "Пещера Гоблинов";
         }
-        if (monsterKills <= 5) {
-            mobName = "Унылый ДПСник";
+        if (playerStatistic.getMonsterKills() <= 5) {
+            mobName = "Гоблин";
             imgBtnMonster.setImageResource(R.drawable.dpsman001);
-        } else if (monsterKills > 5) {
-            mobName = "Веселый ДПСник";
+        } else if (playerStatistic.getMonsterKills() > 5) {
+            mobName = "Легендарный гоблин";
             imgBtnMonster.setImageResource(R.drawable.dpsman002);
     }
         textMonsterName.setText(mobName);
@@ -79,38 +70,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickerBattle(){
-        //int monsterHealth;
-        //int monsterKills =0;
         String message = "";
         String stats = "";
-        clickCountOveral++;
-        /*if (monsterKills == 0) {
-            //monsterHealth = 10;
-            monsterHealth = monsterHealth;
-            //progressBarHP.setMax(monsterHealth);
-        } else if (monsterKills > 0) {
-            //monsterHealth = monsterKills * monsterHealth;
-        }*/
+        playerStats.setClickCountOveral(playerStats.getClickCountOveral()+ 1);
+        if (monster.getMonsterHealthNow() > 0){
+            monster.setMonsterHealthNow(monster.getMonsterHealthNow() - player.clickDamage);
+            message = monster.getMonsterHealthNow() + " HP" + " / " + monster.getMonsterHealth() + " HP";
 
-        if (monsterHealth > 0){
-            monsterHealth -= clickDamage;
-            //progressBarHP.setProgress(monsterHealth);
-            message = monsterHealth + " HP";
+        } else if (monster.getMonsterHealthNow() <= 0){
+            playerStats.setMonsterKills(playerStats.getMonsterKills() + 1);
+            playerStats.setMonsterKillsOveral(playerStats.getMonsterKillsOveral() + 1);
+            playerStats.setLvlFinished(playerStats.getLvlFinished() + 1);
 
-        } else if (monsterHealth <= 0){
-            monsterKills++;
-            monsterKillsOveral++;
-            lvlFinished++;
-            playerExp++;
-            playerMoney = playerMoney + ((lvlFinished * 50) * lvlFinished);
-            monsterHealth = 10 * monsterKills;
-            MoneyCalk moneyCalk = new MoneyCalk(playerMoney);
-            moneyCalk.setPlayerMoney2(playerMoney);
+            player.setPlayerExp(player.getPlayerExp() + (playerStats.getMonsterKills() * 10));
 
+            playerMoney.getMoneyFromKill(playerStats.getMonsterKills());
 
-
+            monster.setMonsterLvl(monster.getMonsterLvl() + 1);
+            monster.newMonster();
+            monster.setMonsterHealthNow(monster.getMonsterHealth());
+            message = monster.getMonsterHealthNow() + " HP" + " / " + monster.getMonsterHealth() + " HP";
         }
-        stats = monsterKills + " сбито ДПСов/" + "  " + clickCountOveral + " кликов/" + "  " + lvlFinished + " уровень/  " +  playerMoney + "  money/";
+        stats = playerStats.getMonsterKills() + " сбито ДПСов/" + "  " + playerStats.getClickCountOveral() +
+                " кликов/" + "  " + playerStats.getLvlFinished() + " уровень/  " +  playerMoney.getMoney() + "  money/";
         textMonsterHealth.setText(message);
         textLocationProgress.setText(stats);
     }
@@ -151,15 +133,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkLocation ();
-                if (monsterHealth >0) {
-                    clickerBattle();
-                } else {
-                    //monsterHealth = 10 * monsterKills;
-                    textMonsterHealth.setText(monsterHealth + " HP");
-                    clickerBattle();
-                }
-
-                //postProgress(monsterHealth);
+                clickerBattle();
             }
         });
 
@@ -232,18 +206,160 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-class MoneyCalk {
-    public MoneyCalk(int playerMoney2) {
-        this.playerMoney2 = playerMoney2;
+class PlayerMoney {
+    protected static int money;
+
+
+    /*public PlayerMoney(int money) {
+        this.money = money;
+    }*/
+    public void getMoneyFromKill(int kills){
+        money  += (45 * kills);
+    }
+    public int getMoney() {
+        return money;
     }
 
-    public int getPlayerMoney2() {
-        return playerMoney2;
+    public void setMoney(int money) {
+        this.money = money;
     }
 
-    public void setPlayerMoney2(int playerMoney2) {
-        this.playerMoney2 = playerMoney2;
+    @Override
+    public String toString() {
+        return "PlayerMoney{" +
+                "money=" + money +
+                '}';
+    }
+}
+class PlayerStatistic {
+    private int monsterKills;
+    private int monsterKillsOveral;
+    private int clickCountOveral;
+    private int lvlFinished;
+
+
+    /*public PlayerStatistic(int monsterKills, int monsterKillsOveral, int clickCountOveral, int lvlFinished) {
+        this.monsterKills = monsterKills;
+        this.monsterKillsOveral = monsterKillsOveral;
+        this.clickCountOveral = clickCountOveral;
+        this.lvlFinished = lvlFinished;
+    }*/
+
+    public int getMonsterKills() {
+        return monsterKills;
     }
 
-    private int playerMoney2;
+    public void setMonsterKills(int monsterKills) {
+        this.monsterKills = monsterKills;
+    }
+
+    public int getMonsterKillsOveral() {
+        return monsterKillsOveral;
+    }
+
+    public void setMonsterKillsOveral(int monsterKillsOveral) {
+        this.monsterKillsOveral = monsterKillsOveral;
+    }
+
+    public int getClickCountOveral() {
+        return clickCountOveral;
+    }
+
+    public void setClickCountOveral(int clickCountOveral) {
+        this.clickCountOveral = clickCountOveral;
+    }
+
+    public int getLvlFinished() {
+        return lvlFinished;
+    }
+
+    public void setLvlFinished(int lvlFinished) {
+        this.lvlFinished = lvlFinished;
+    }
+}
+class Player {
+    public int playerLvl;
+    public int playerExp;
+
+    public int clickDamage = 1 ;
+
+    public int getPlayerLvl() {
+        return playerLvl;
+    }
+
+    public void setPlayerLvl(int playerLvl) {
+        this.playerLvl = playerLvl;
+    }
+
+    public int getPlayerExp() {
+        return playerExp;
+    }
+
+    public void setPlayerExp(int playerExp) {
+        this.playerExp = playerExp;
+    }
+
+    public int getClickDamage() {
+        return clickDamage;
+    }
+
+    public void setClickDamage(int clickDamage) {
+        this.clickDamage = clickDamage;
+    }
+}
+class MonsterCharacter {
+    public int monsterHealth = 10;
+    public int monsterHealthNow = 10;
+    private int id;
+    private String monsterName;
+
+    public int getMonsterHealthNow() {
+        return monsterHealthNow;
+    }
+
+    public void setMonsterHealthNow(int monsterHealthNow) {
+        this.monsterHealthNow = monsterHealthNow;
+    }
+
+    public int getMonsterLvl() {
+        return monsterLvl;
+    }
+
+    public void setMonsterLvl(int monsterLvl) {
+        this.monsterLvl = monsterLvl;
+    }
+
+    private  int monsterLvl = 1;
+
+    public int getMonsterHealth() {
+        return monsterHealth;
+    }
+
+    public void setMonsterHealth(int monsterHealth) {
+        this.monsterHealth = monsterHealth;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getMonsterName() {
+        return monsterName;
+    }
+
+    public void setMonsterName(String monsterName) {
+        this.monsterName = monsterName;
+    }
+    public int newMonster () {
+        monsterHealth = monsterLvl * 10;
+        return monsterHealth;
+    }
+    public int newMonsterHealthNow () {
+        monsterHealthNow = monsterHealth;
+        return monsterHealthNow;
+    }
 }
